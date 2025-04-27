@@ -1,0 +1,23 @@
+.clients {
+    padding: 60px 0;
+  }
+  .clients h2 {
+    text-align: center;
+    font-family: 'Georgia', serif;
+    margin-bottom: 40px;
+  }
+  .client-window {
+    overflow: hidden;
+  }
+  .client-track {
+    display: flex;
+    gap: 20px;        /* space between logos */
+  }
+  .client-logo {
+    padding: 0 10px;  /* horizontal padding around each logo */
+  }
+  .client-logo img {
+    max-width: 80%;      /* adjust as needed */
+    margin: 0 auto;
+    display: block;
+  }
