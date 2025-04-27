@@ -59,7 +59,7 @@ body.dark-mode {
 .navbar .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #e3342f; /* changed from blue to red */
+  color: #3B82F6; /* changed from blue to red */
   font-family: 'Georgia', serif;
 }
 
@@ -88,7 +88,7 @@ body.dark-mode {
 
 .navbar .nav-links li a:hover,
 .navbar .nav-links li a.active {
-  color: #e3342f; /* changed from blue to red */
+  color: #3B82F6; /* changed from blue to red */
 }
 
 /* Mobile Menu (if applicable) */
@@ -149,7 +149,7 @@ body.dark-mode {
 }
 
 .hero .overlay a {
-  background-color: #e3342f;  /* changed from blue to red */
+  background-color: #3B82F6;  /* changed from blue to red */
   color: #fff;
   padding: 10px 20px;
   border-radius: 30px;
@@ -266,7 +266,7 @@ body.dark-mode {
   content: "•";
   position: absolute;
   left: 0;
-  color: #e3342f;  /* changed from blue to red */
+  color: #3B82F6;  /* changed from blue to red */
 }
 
 /* Contact Section */
@@ -340,7 +340,7 @@ body.dark-mode {
 .inquiry button {
   padding: 10px 20px;
   border: none;
-  background-color: #e3342f;  /* changed from blue to red */
+  background-color: #3B82F6;  /* changed from blue to red */
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
@@ -364,7 +364,7 @@ body.dark-mode {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #e3342f;  /* changed from blue to red */
+  background-color: #3B82F6;  /* changed from blue to red */
   color: #fff;
   border: none;
   padding: 12px 15px;
@@ -375,7 +375,7 @@ body.dark-mode {
 }
 
 .scroll-to-top:hover {
-  background-color: #c53030;  /* changed from blue to a darker red */
+  background-color: #1E40AF;  /* changed from blue to a darker red */
 }
 
 /* ---------------------------------------*/
@@ -496,7 +496,7 @@ body.dark-mode textarea {
 
 .navbar .nav-links li a:hover,
 .navbar .nav-links li a.active {
-  color: #e3342f;  /* changed from blue to red */
+  color: #3B82F6;  /* changed from blue to red */
 }
 
 /* Theme Toggle Button */
@@ -515,7 +515,7 @@ body.dark-mode textarea {
 }
 
 .light-mode .theme-toggle {
-  border-color: #e3342f;  /* changed from blue to red */
+  border-color: #3B82F6;  /* changed from blue to red */
 }
 
 .dark-mode .theme-toggle {
@@ -688,12 +688,13 @@ body.dark-mode .product-card {
   content: "•";
   position: absolute;
   left: 0;
-  color: #e3342f;  /* changed from blue to red */
+  color: #3B82F6;  /* changed from blue to red */
 }
 
 /* Bullet color in dark mode */
 body.dark-mode .product-card ul li::before {
-  color: #f87171;  /* changed from blue to a lighter red tone */
+  /* color: #f87171;  changed from blue to a lighter red tone */
+  color: #60A5FA;
 }
 
 /* Hover Effect */

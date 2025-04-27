@@ -4,12 +4,12 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Products from './components/Products';
-import Clients from './components/Clients';
+// import Clients from './components/Clients';
 import Inquiry from './components/Inquiry';
 import Contact from './components/Contact';
 import ScrollToTop from './components/ScrollToTop';
 
-import {clientsList } from './data';  // ← add clientsList
+// import {clientsList } from './data';  // ← add clientsList
 
 
 const RajaFabricatorsWebsite = () => {
@@ -24,7 +24,7 @@ const RajaFabricatorsWebsite = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'products', 'clients', 'contact', 'inquiry'];
+      const sections = ['home', 'about', 'products',  'contact', 'inquiry'];
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
@@ -50,7 +50,6 @@ const RajaFabricatorsWebsite = () => {
       <Hero images={heroImages} isDarkMode={isDarkMode} />
       <About isDarkMode={isDarkMode} />
       <Products products={products} isDarkMode={isDarkMode} />
-      <Clients clients={clientsList} />
       <Inquiry />
       <Contact contactInfo={contactInfo} isDarkMode={isDarkMode} />
       <ScrollToTop />
