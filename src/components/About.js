@@ -25,7 +25,7 @@ const About = ({ isDarkMode }) => {
           <a href="#products">Explore Our Products</a>
         </div>
         <div className="about-image">
-          <img src="circle_cropped_image.png" alt="Our Urine Bags" />
+          <img src="aboutus.png" alt="Our Urine Bags" />
         </div>
       </div>
     </section>
