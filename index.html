@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UroCare Polymer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Web site created using create-react-app">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="logo192.png">
+  <style>
+    /* ...copy all CSS from src/styles.css here... */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #F9FAFB;
+      color: #1F2937;
+    }
+    body.dark-mode {
+      background-color: #1F2937;
+      color: #F3F4F6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .navbar.dark-mode {
+      background-color: #374151;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .navbar .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #3B82F6;
+      font-family: 'Georgia', serif;
+    }
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+    }
+    .navbar .nav-links li {
+      margin-left: 20px;
+    }
+    .navbar .nav-links li a {
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      color: #4B5563;
+    }
+    .navbar.dark-mode .nav-links li a {
+      color: #D1D5DB;
+    }
+    .navbar .nav-links li a:hover,
+    .navbar .nav-links li a.active {
+      color: #3B82F6;
+    }
+    .theme-toggle {
+      background-color: transparent;
+      border: 2px solid #3B82F6;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      font-size: 1.2rem;
+      color: #3B82F6;
+    }
+    .navbar.dark-mode .theme-toggle {
+      border-color: #F3F4F6;
+      color: #F3F4F6;
+    }
+    @media (max-width: 768px) {
+      .navbar .nav-links {
+        display: none;
+      }
+      .mobile-menu {
+        display: block;
+      }
+    }
+    .hero {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 1s ease;
+    }
+    .hero .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      color: #fff;
+    }
+    .hero .overlay h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-family: 'Georgia', serif;
+      animation: fadeInDown 1s ease-out;
+    }
+    .hero .overlay p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+    .hero .overlay a {
+      background-color: #3B82F6;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .hero .overlay a:hover {
+      background-color: #c53030;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .about {
+      padding: 60px 0;
+    }
+    .about .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      padding: 0 20px;
+    }
+    .about .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+    .about .about-text h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Georgia', serif;
+    }
+    .about .about-text p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+    .about .about-image {
+      flex: 1;
+      min-width: 300px;
+      max-width: 350px;
+    }
+    .about .about-image img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .products {
+      padding: 60px 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .products h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Georgia', serif;
+      color: inherit;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      color: #1F2937;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    body.dark-mode .product-card {
+      background-color: #2c3e50;
+      color: #F3F4F6;
+    }
+    .product-card img {
+      width: auto;
+      height: 200px;
+      object-fit: cover;
+      padding-left: 70px;
+    }
+    .product-card .card-content {
+      padding: 15px;
+    }
+    .product-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: inherit;
+    }
+    .product-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .product-card ul li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 5px;
+      color: inherit;
+    }
+    .product-card ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #3B82F6;
+    }
+    body.dark-mode .product-card ul li::before {
+      color: #60A5FA;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .inquiry {
+      padding: 60px 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-color: #ffffff;
+      color: #1F2937;
+    }
+    body.dark-mode .inquiry {
+      background-color: #2c3e50;
+      color: #F3F4F6;
+    }
+    .inquiry h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Georgia', serif;
+    }
+    .inquiry .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .inquiry form {
+      display: flex;
+      flex-direction: column;
+    }
+    .inquiry .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .inquiry .form-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: inherit;
+    }
+    .inquiry .form-group input,
+    .inquiry .form-group textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: inherit;
+      background-color: transparent;
+    }
+    body.dark-mode .inquiry .form-group input,
+    body.dark-mode .inquiry .form-group textarea {
+      border: 1px solid #4B5563;
+    }
+    .inquiry button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #3B82F6;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .inquiry button:hover {
+      background-color: #c53030;
+    }
+    .success-message {
+      margin-top: 20px;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+    }
+    .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #3B82F6;
+      color: #fff;
+      border: none;
+      padding: 12px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+      font-size: 1.5rem;
+      z-index: 2000;
+      display: none;
+    }
+    .scroll-to-top.show {
+      display: block;
+    }
+    .scroll-to-top:hover {
+      background-color: #1E40AF;
+    }
+    .contact {
+      padding: 60px 0;
+      background-color: #f5f5f5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark-mode .contact {
+      background-color: #2c3e50;
+      color: #F3F4F6;
+    }
+    .contact h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Georgia', serif;
+    }
+    .contact-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .contact-left {
+      margin: 0;
+      flex: 0 0 auto;
+      width: 400px;
+      height: 250px;
+    }
+    .contact-right {
+      flex: 1;
+      min-width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 40px;
+    }
+    .contact p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    /* Clients Section */
+    .clients {
+      padding: 60px 0;
+    }
+    .clients h2 {
+      text-align: center;
+      font-family: 'Georgia', serif;
+      margin-bottom: 40px;
+    }
+    .client-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+    .client-logo img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body class="light-mode">
+  <nav class="navbar" id="navbar">
+    <div class="navbar-left">
+      <span class="logo">UroCare Polymer</span>
+    </div>
+    <ul class="nav-links navbar-center">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#inquiry">Inquiry</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="navbar-right">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+  <section class="hero" id="home">
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Hero" />
+    <div class="overlay">
+      <h1>Welcome to UroCare Polymer</h1>
+      <p>Leading manufacturer and supplier of high-quality medical-grade polymer products for urological care. Our commitment is to innovation, safety, and patient comfort.</p>
+      <a href="#products">Explore Products</a>
+    </div>
+  </section>
+  <section class="about" id="about">
+    <div class="about-container container">
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>UroCare Polymer is dedicated to providing advanced polymer-based solutions for urological healthcare. With years of experience and a focus on quality, we serve hospitals, clinics, and distributors across the region.</p>
+        <p>Our mission is to improve patient outcomes through reliable, safe, and innovative products. We adhere to stringent quality standards and continuously invest in research and development.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1519494080410-f9aa8f52f1e1?auto=format&fit=crop&w=600&q=80" alt="About UroCare Polymer" />
+      </div>
+    </div>
+  </section>
+  <section class="products" id="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1511174511562-5f97f4f4e0c8?auto=format&fit=crop&w=400&q=80" alt="Foley Catheter" />
+        <div class="card-content">
+          <h3>Foley Catheter</h3>
+          <ul>
+            <li>Medical-grade silicone</li>
+            <li>Latex-free, biocompatible</li>
+            <li>Multiple sizes available</li>
+            <li>Sterile packaging</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Urine Collection Bag" />
+        <div class="card-content">
+          <h3>Urine Collection Bag</h3>
+          <ul>
+            <li>Leak-proof design</li>
+            <li>Graduated measurement</li>
+            <li>Anti-reflux valve</li>
+            <li>Available in various capacities</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=400&q=80" alt="Urethral Catheter" />
+        <div class="card-content">
+          <h3>Urethral Catheter</h3>
+          <ul>
+            <li>Flexible and smooth</li>
+            <li>Minimizes patient discomfort</li>
+            <li>Color-coded for easy identification</li>
+            <li>Individually packed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="inquiry" id="inquiry">
+    <div class="container">
+      <h2>Product Inquiry</h2>
+      <form id="inquiry-form" autocomplete="off">
+        <div class="form-group">
+          <label for="name">Name*</label>
+          <input type="text" id="name" name="name" required placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email*</label>
+          <input type="email" id="email" name="email" required placeholder="Your Email">
+        </div>
+        <div class="form-group">
+          <label for="message">Message*</label>
+          <textarea id="message" name="message" rows="4" required placeholder="Your Inquiry"></textarea>
+        </div>
+        <button type="submit">Send Inquiry</button>
+        <div class="success-message" id="inquiry-success" style="display:none;">Thank you for your inquiry!</div>
+      </form>
+    </div>
+  </section>
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-container">
+      <div class="contact-left">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019073043448!2d-122.41941518468147!3d37.7749297797597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c7e6d8b0b%3A0x7d0f1e6d7e6d8b0b!2sSan%20Francisco!5e0!3m2!1sen!2sus!4v1680000000000"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="UroCare Polymer Location"></iframe>
+      </div>
+      <div class="contact-right">
+        <p><strong>Address:</strong> 123 Medical Park, San Francisco, CA 94103</p>
+        <p><strong>Phone:</strong> +1 555-123-4567</p>
+        <p><strong>Email:</strong> info@urocarepolymer.com</p>
+        <p><strong>Hours:</strong> Mon-Fri, 9am - 6pm</p>
+      </div>
+    </div>
+  </section>
+  <button class="scroll-to-top" id="scrollToTopBtn" aria-label="Scroll to top">↑</button>
+  <script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    let dark = false;
+    themeToggle.addEventListener('click', function() {
+      dark = !dark;
+      if (dark) {
+        body.classList.add('dark-mode');
+        body.classList.remove('light-mode');
+        themeToggle.textContent = '☀️';
+      } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        themeToggle.textContent = '🌙';
+      }
+    });
+
+    // Navbar active link logic
+    const navLinks = document.querySelectorAll('.nav-links li a');
+    window.addEventListener('scroll', () => {
+      const sections = ['home', 'about', 'products', 'inquiry', 'contact'];
+      let current = '';
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            current = section;
+            break;
+          }
+        }
+      }
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Scroll to top button logic
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollBtn.classList.add('show');
+      } else {
+        scrollBtn.classList.remove('show');
+      }
+    });
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Inquiry form fake submit
+    document.getElementById('inquiry-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('inquiry-success').style.display = 'block';
+      this.reset();
+      setTimeout(() => {
+        document.getElementById('inquiry-success').style.display = 'none';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
