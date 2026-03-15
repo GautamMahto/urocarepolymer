@@ -492,7 +492,27 @@
       color: #334155;
       transition: color 0.4s;
     }
-    /* Gallery */
+    /* Gallery Swiper */
+    .gallery-swiper {
+      padding: 16px 48px 48px 48px;
+    }
+    .gallery-swiper .swiper-slide {
+      height: auto;
+    }
+    .gallery-swiper .gallery-item {
+      height: 100%;
+    }
+    .gallery-swiper .swiper-button-prev,
+    .gallery-swiper .swiper-button-next {
+      color: var(--accent);
+    }
+    .gallery-swiper .swiper-button-prev:after,
+    .gallery-swiper .swiper-button-next:after {
+      font-size: 1.4rem;
+    }
+    .gallery-swiper .swiper-pagination-bullet-active {
+      background: var(--accent);
+    }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -951,19 +971,44 @@
     <section id="gallery" class="py-5 bg-light">
       <div class="container">
         <h2 class="section-title" data-aos="fade-up">Our Facility &amp; Products Gallery</h2>
-        <div class="gallery-grid">
-          <a href="Data\product_1.jpeg" data-lightbox="gallery" data-title="Machinery 1" class="gallery-item" data-aos="zoom-in">
-            <img src="Data\product_1.jpeg" alt="Machinery 1" loading="lazy">
-          </a>
-          <a href="Data\product_2.jpg" data-lightbox="gallery" data-title="Machinery 2" class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
-            <img src="Data\product_2.jpg" alt="Machinery 2" loading="lazy">
-          </a>
-          <a href="Data\product_3.jpg" data-lightbox="gallery" data-title="Product 1" class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
-            <img src="Data\product_3.jpg" alt="Product 1" loading="lazy">
-          </a>
-          <a href="Data\product_4.jpeg" data-lightbox="gallery" data-title="Product 2" class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
-            <img src="Data\product_4.jpeg" alt="Product 2" loading="lazy">
-          </a>
+        <div class="swiper gallery-swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a href="Data\product_1.jpeg" data-lightbox="gallery" data-title="Machinery 1" class="gallery-item">
+                <img src="Data\product_1.jpeg" alt="Machinery 1" loading="lazy">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="Data\product_2.jpg" data-lightbox="gallery" data-title="Machinery 2" class="gallery-item">
+                <img src="Data\product_2.jpg" alt="Machinery 2" loading="lazy">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="Data\product_3.jpg" data-lightbox="gallery" data-title="Product 1" class="gallery-item">
+                <img src="Data\product_3.jpg" alt="Product 1" loading="lazy">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="Data\product_4.jpeg" data-lightbox="gallery" data-title="Product 2" class="gallery-item">
+                <img src="Data\product_4.jpeg" alt="Product 2" loading="lazy">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="Data\product_5.jpeg" data-lightbox="gallery" data-title="Product 3" class="gallery-item">
+                <img src="Data\product_5.jpeg" alt="Product 3" loading="lazy">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="Data\product_6.jpeg" data-lightbox="gallery" data-title="Product 4" class="gallery-item">
+                <img src="Data\product_6.jpeg" alt="Product 4" loading="lazy">
+              </a>
+            </div>
+          </div>
+          <!-- Swiper Navigation -->
+          <div class="swiper-button-prev gallery-prev"></div>
+          <div class="swiper-button-next gallery-next"></div>
+          <!-- Swiper Pagination -->
+          <div class="swiper-pagination gallery-pagination mt-3"></div>
         </div>
       </div>
     </section>
@@ -1204,6 +1249,21 @@
       breakpoints: {
         576: { slidesPerView: 2 },
         992: { slidesPerView: 3 }
+      }
+    });
+
+    // Swiper.js for Gallery
+    new Swiper('.gallery-swiper', {
+      loop: true,
+      autoplay: { delay: 3000, disableOnInteraction: false },
+      pagination: { el: '.gallery-pagination', clickable: true },
+      navigation: { nextEl: '.gallery-next', prevEl: '.gallery-prev' },
+      slidesPerView: 1,
+      spaceBetween: 18,
+      breakpoints: {
+        576: { slidesPerView: 2 },
+        768: { slidesPerView: 3 },
+        992: { slidesPerView: 4 }
       }
     });
 
